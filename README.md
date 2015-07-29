@@ -9,6 +9,43 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+### AddressInfo
+
+```swift
+
+import Sockets
+
+do {
+  let addresses = GetAddressInfo(3000, options: SocketAddressInfoOption.Passive|SocketAddressInfoOption.CanonName)
+
+} catch {
+  print("Got error: \(error)")
+  exit(1)
+}
+
+
+let server = Sockets.listen(addresses, accept: { (client) -> Void in 
+  
+  client.send("Hello client \(client.remoteAddress)")
+  
+  client.read { (data, length)
+    let str = CSString(data)
+    print("Got from client: \(str)")
+  }
+  
+})
+
+
+
+let client = Sockets.connect(addreses)
+let data = client.read()
+
+print(CSString(data))
+
+client.send("Hello server")
+
+```
+
 ## Requirements
 
 ## Installation
