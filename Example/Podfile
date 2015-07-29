@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'Sockets_Example', :exclusive => true do
+  pod "Sockets", :path => "../"
+end
+
+target 'Sockets_Tests', :exclusive => true do
+  pod "Sockets", :path => "../"
+
+  pod 'Quick', '~> 0.3.1'
+  pod 'Nimble'
+end
